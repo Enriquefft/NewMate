@@ -1,0 +1,3 @@
+[submodule "automate"]
+	path = automate
+	url = git@github.com:deGravity/automate.git
