@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "newmate"
+version = "0.1.0"
+description = "A reimplementation of Automate"
+authors = ["Enriquefft <enriquefft2001@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+icecream = "^2.1.3"
+uvicorn = "^0.29.0"
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.24.4"
+pytest = "^7.4.3"
+ruff = "^0.1.8"
+
+[tool.poe.tasks]
+test = "pytest"
+lint = "ruff check"
+_build = "poetry build"
+build = ["lint", "test", "_build"]
+export = "poetry export --without-hashes --format=requirements.txt --all-extras --output requirements.txt"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D203", "D212", "FA", "ANN101"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = ["E402", "S101"]
+
+[tool.pyright]
+typeCheckingMode = "strict"
+pythonVersion = "3.12"
+verboseOutput = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
